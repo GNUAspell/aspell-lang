@@ -1,8 +1,61 @@
-2004-08-10
+2006-11-22
 
 This is an experimental version of the Aspell language toolkit
 (temporary name).  It can be used to create dictionaries for Aspell
 both Aspell 0.50 and 0.60.
+
+**********************************************************************
+                           Getting Started
+**********************************************************************
+
+Since Aspell is 8-bit internally you need to first decide on a charset
+to use.  See the section "Provided Character Sets" for a list of
+available character sets.  If none of the character sets are adequate
+then you need to create a new one for your language.  If this is
+necessary please email aspell-dict@gnu.org for help.
+
+Now cd to the location of the aspell-lang package (the directory this
+file is in) and run
+  ./pre LANG CHARSET 
+where LANG is the iso language code for your language and CHARSET is
+the charset you decided
+
+This will create a directory LANG with the following files in it:
+  info
+  LANG.dat
+  LANG.wl
+  Copyright
+  proc (symbolic link)
+and possible
+  CHARSET.cset
+  CHARSET.cmap
+  misc/CHARSET.txt
+
+Edit the "info" and "Copyright" file as appropriate.  See the next
+section for what these fields mean.
+
+If you chose a charset which Aspell provides than the default
+encoding will be that charset.  If you rather use "utf-8" than
+uncomment the line "data-encoding utf-8" in LANG.dat.
+
+Replace LANG.wl with a small word list for your language.
+
+Now to build the word list:
+  ./proc
+  ./configure
+  make
+
+And if all goes well you should have a very basic dictionary for your
+language.  You can install it if you want using "make install".
+
+If you want to make a dictionary package use "make dist".
+
+Please see "Adding Support For Other Languages" in the Aspell manual
+and the rest of the document for where to go from here.
+
+When you have something ready to disribute check over requirements
+section in this file and once you are reasonably sure you have
+something ready to upload send it to aspell-dict@gnu.org.
 
 **********************************************************************
      Draft Documentation on the layout of Aspell dicts packages
@@ -221,6 +274,44 @@ To create a distribution do a
 
 
 **********************************************************************
+         Requirements in order to be upload to ftp.gnu.org
+**********************************************************************
+
+The number one requiment is that the dictionary package MUST be made
+using "make dist" using the "proc" script as previously desribed.
+This will check for a large number of things.
+
+When building the dictionary there should, in general, not be any
+warnings.
+
+The version string must end in "-NUM" where NUM is generally 0.  This
+is to allow for minor updates.  In addition there should not be any
+other "-" in the version string.
+
+"name_native" should be given a value if it is diffrent from the
+English spelling
+
+The "complete" and "accurate" fields should have a value other than
+unknown.
+
+If the dictionary package is based on another dictionary than
+"source-version" and propabably "url" should be given a value.  Also,
+the version string should be made to resemble the upstream version to
+make the relationship clear.
+
+If one of the authors plans to act as the maintainer for the
+dictionary package set add the line "maintainer true" for that author.
+There may be more than one maintainer.
+
+The file Copyright should contain a clear Copyright notice, which
+icnluded the owner of the Copyright.  It should be something like:
+
+  Copyright (c) YEAR by SO AND SO under the WHAT.
+
+The copright must meet FSF defination of free.  See 
+  http://www.gnu.org/licenses/license-list.html
+
+**********************************************************************
        GNU Aspell mkchardata Perl script and Unicode data file
 **********************************************************************
 
@@ -411,6 +502,9 @@ Vietnamese:
   viscii
   tcvn3
 
+Other standard mapings:
+  iso-6438 - Extended African Latin Alphabet
+
 Simple Unicode mappings:
   u-armn - Armenian   (U+0530..U+058F to 0xA0..0xFF)
   u-beng - Bengali    (U+0980..U+09FF to 0x80..0xFF)
@@ -440,6 +534,9 @@ The latin letters are not used in any of the above unicode mappings.
 Language specific mappings.  If you use any of these you should rename
 them as the exact details may change without notice.
   l-az - Azerbaijani
+  l-fa - Persian
+  l-ky - Kirghiz
+  l-sr - Serbian (supports both the Cyrillic and Latin script)
   l-tg - Tajik 
   l-tr - Turkish (iso-8859-9 with special case rules for dotless I)
   l-uz - Uzbek

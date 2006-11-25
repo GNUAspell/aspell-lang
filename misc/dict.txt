@@ -47,8 +47,15 @@ wa
 zu
 
 be
+ny
+tl
+ku
+mg
+
+hil
 
 # Aspell 0.60
+am E
 az E
 bn E
 et E
@@ -59,92 +66,49 @@ hu E
 la E
 lt E
 lv E
+mn E
+qu E
 ta E
 uz E
 vi E
 yi E
-mn E
+fa E
+or E
+nds E
+pa E
+csb E
+
+hi E
+mr E
+
+te E
 
 # Binary Ispell hash tables only
 sq M
 
 # crubadan begin
-ast M
-bem M
-bi M
-ceb M
-ch M
-co M
-eu M
-fj M
-fur M
-fy M
-gn M
-ha M
-haw M
-hil M
-ht M
-iba M
-ig M
-ilo M
-kac M
-kl M
-kw M
-lg M
-li M
-ln M
-luo M
-mg M
-min M
-nd M
-nds M
-ng M
-nso M
-oc M
-pam M
-pap M
-qu M
-rn M
-se M
-sm M
-sn M
-so M
-ss M
-st M
-su M
-to M
-tpi M
-ts M
-ty M
-ve M
-xh M
 # crubadan end
-ny P
 
 # made contact with kde/gnome translation teams
 bs M
 eu M
 gu M
-hi M
+#hi M
 kg M
 li M
-ml M
-mr M
-nds M
+#mr M
 ne M
 ss M
-te M
-tg P
-tl P
+tg M
 ur M
 ve M
 xh M
 
 # other possibilites
-am P
 ar P
-fa M # Need word list
 lb M
 sr M
 ti M
-
+tk P
+ak P
+ml P

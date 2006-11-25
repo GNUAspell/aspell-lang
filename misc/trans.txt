@@ -6,6 +6,8 @@ en
 es I
 fr
 ga
+it
+mn 
 nl
 pt I
 ro I
@@ -13,5 +15,6 @@ ru
 sr I
 tg I
 uk
+vi
 wa I
-mn 
+sl

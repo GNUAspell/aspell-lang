@@ -278,6 +278,7 @@ Latin:
   yo
   za
   zu
+  csb
 
   bem
   kac
@@ -286,9 +287,18 @@ Latin:
   pam
   ilo
   fur
+  lua
   luo
   min
   iba
+  ban
+  kok
+  chk
+  tkl
+  niu
+  loz
+  kha
+  rar
 
 Malayalam:
   ml

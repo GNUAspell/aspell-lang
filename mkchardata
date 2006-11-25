@@ -13,6 +13,8 @@ no locale;
 
 use IO::File;
 
+use Data::Dumper;
+
 use constant { 
   CHAR => 0, TYPE => 1, DISPLAY=> 2, UPPER => 3, LOWER => 4, TITLE => 5,
   PLAIN => 6, SCRIPT => 7, NAME => 8,
@@ -138,7 +140,6 @@ foreach my $file (@ARGV) {
           ($char =~ /(.+?)\.\.(.+)/ ? (hex($1)..hex($2)) : hex $char);
         my @uni = map {sprintf "%04X", $_}
           ($uni =~ /(.+?)\.\.(.+)/ ? (hex($1)..hex($2)) : hex $uni);
-        #print "$base: @char = @uni\n";
         die "bad range in $base\n" unless @char == @uni;
         my $num = @char;
         for (my $i = 0; $i != $num; $i++) {
@@ -267,7 +268,7 @@ foreach my $file (@ARGV) {
     }
   }
 
-  push @ord, '> ascii' unless $no_ascii || $base eq 'ascii';
+  #push @ord, '> ascii' unless $no_ascii || $base eq 'ascii';
 
   print OUT "# Aspell Character Data File.\n";
   foreach (@ord) {print OUT "$_\n";}

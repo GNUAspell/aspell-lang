@@ -142,6 +142,19 @@ while (my ($k, $v) = each %L) {
 #
 #
 
+open F, ">dict.lst";
+foreach my $k ( sort keys %L) {
+  my $d = $L{$k}[3];
+  next unless defined $d;
+  next unless $d eq '0.50' || $d eq '0.60';
+  print F "$k\n";
+}
+close F;
+
+#
+#
+#
+
 sub table ( $ @ ) {
 
   my $file = shift;
@@ -210,6 +223,14 @@ sub table2 ( $ @ ) {
 
 table 'lang-supported', @alpha;
 table2 'lang-unsupported', @unsup;
+
+open F, ">planned.txt";
+foreach my $k (sort keys %L) {
+  my @d = @{$L{$k}};
+  next unless $d[3] eq 'Planned';
+  print F "$d[0] $d[1]\n";
+}
+close F;
 
 sub otrans ( $ $ ) {
   my $i = shift;

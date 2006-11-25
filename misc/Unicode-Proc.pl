@@ -32,6 +32,10 @@ my @alpha = (
   0x2071, 0x207F
 );
 
+my @modifier = (
+  0x200C, 0x200D
+);
+
 my $file_format = <<"---";
 Aspell Unicode Data File.
 Generated with "Unicode-Proc.pl" from the Unicode Character Database 4.0.0.
@@ -137,6 +141,10 @@ for (my $i = 0; $i < @data; ++$i) {
   }
   $plain = $plain || $uni;
   $final[$i] = [$uni, $type, $d[1], undef, $display, $upper, $lower, $title, $plain, 'Zyyy'];
+}
+
+foreach (@modifier) {
+  $final[$_][TYPE] = 'M';
 }
 
 # recursively apply the plain attribute
@@ -303,6 +311,7 @@ while (<F>) {
 }
 
 &ethiopic;
+&serbian;
 
 open T, ">unicode.txt";
 open D, ">unicode.dat";
@@ -378,6 +387,27 @@ sub ethiopic {
       my $v = sprintf "%04X", 0xE430 + $i;
       #print "$c $v = $uni\n";
       $decomp{$uni} = ["$c $v", '='];
+    }
+  }
+}
+
+sub serbian {
+  my @upper = (0x410, 0x415, 0x418, 0x41E, 0x423);
+  my @accents = (0x0300, 0x0301, 0x0302, 0x030F);
+  my $base = 0xE3C0;
+  my $i = $base;
+  foreach my $c (@upper) {
+    foreach my $a (@accents) {
+      my $u = sprintf "%04X", $i;
+      my $l = sprintf "%04X", $i + 1;
+      my ($suf) = $final[$a][NAME] =~ /^COMBINING (.+)/ or die;
+      $final[$i]   = [$u, 'Lu', "[$final[$c][NAME] WITH $suf]", 
+                      'V', 'N', ,$u, $l, $u, $final[$c][UPPER], 'Cyrl'];
+      $final[$i+1] = [$l, 'Ll', "[$final[hex $final[$c][LOWER]][NAME] WITH $suf]",
+                      'V', 'N', ,$u, $l, $u, $final[$c][LOWER], 'Cyrl'];
+      $decomp{$u} = [sprintf("%s %04X", $final[$c][UPPER], $a), '='];
+      $decomp{$l} = [sprintf("%s %04X", $final[$c][LOWER], $a), '='];
+      $i += 2;
     }
   }
 }
