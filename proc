@@ -297,7 +297,7 @@ my %global_insr =
     }
    }
   );
-my %copyright_map = qw(LGPL LGPLv2.1 GPL GPLv2 FDL FDLv1.2);
+my %copyright_map = qw(LGPL LGPLv2.1 GPL GPLv2 FDL FDLv1.1);
 
 sub doc_entries() {qw (readme_file copying_file copyright_file)}
 
