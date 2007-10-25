@@ -1,4 +1,5 @@
 be I
+ca
 cs
 da I
 de
@@ -12,9 +13,10 @@ nl
 pt I
 ro I
 ru
+sl
 sr I
+sv I
 tg I
 uk
 vi
 wa I
-sl
