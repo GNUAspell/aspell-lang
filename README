@@ -1,4 +1,4 @@
-2006-11-22
+2007-10-24
 
 This is an experimental version of the Aspell language toolkit
 (temporary name).  It can be used to create dictionaries for Aspell
@@ -120,9 +120,12 @@ The following Single value settings are mandatory:
 name_english: The english name of the language
 lang: The language code
 copyright: The copyright one of:
-  LGPL
-  GPL
-  FDL
+  LGPLv2.1
+  LGPLv3
+  GPLv2
+  GPLc3
+  FDLv1.1
+  VDLv1.2
   Artistic
   Copyrighted (Copyright message must remain)
   Open Source (Meets OSI definition)
@@ -130,8 +133,8 @@ copyright: The copyright one of:
   Other
   Unknown
 version: A version string
-complete: "true" if the dictionary is reasonably complete, "false"
-  otherwise, or "unknown"
+complete: "true" if the dictionary is reasonably complete, "almost", 
+  if its close, "false" otherwise, or "unknown"
 accurate: "true" if the dictionary is accurate (ie every word is a
   valid), "false" otherwise, or "unknown"
 
@@ -294,7 +297,7 @@ English spelling
 The "complete" and "accurate" fields should have a value other than
 unknown.
 
-If the dictionary package is based on another dictionary than
+If the dictionary package is based on another dictionary, then
 "source-version" and propabably "url" should be given a value.  Also,
 the version string should be made to resemble the upstream version to
 make the relationship clear.
@@ -308,7 +311,7 @@ icnluded the owner of the Copyright.  It should be something like:
 
   Copyright (c) YEAR by SO AND SO under the WHAT.
 
-The copright must meet FSF defination of free.  See 
+The copyright must meet FSF defination of free.  See 
   http://www.gnu.org/licenses/license-list.html
 
 **********************************************************************
@@ -513,7 +516,6 @@ Simple Unicode mappings:
   u-gujr - Gujarati   (U+0A80..U+0AFF to 0x80..0xFF)
   u-guru - Gurmukhi   (U+0A00..U+0A7F to 0x80..0xFF)
   u-knda - Kannada    (U+0C80..U+0CFF to 0x80..0xFF)
-  u-mlym - Malayalam  (U+0D00..U+0D7F to 0x80..0xFF)
   u-mong - Mongolian  (U+1800..U+187F to 0x80..0xFF)
   u-mymr - Myanmar    (U+1000..U+105F to 0xA0..0xFF)
   u-orya - Oriya      (U+0B00..U+0B7F to 0x80..0xFF)
@@ -524,6 +526,7 @@ Simple Unicode mappings:
   u-thaa - Thaana     (U+0780..U+07BF to 0xC0..0xFF)
 
 Not so simple Unicode mappings:
+  u-mlym - Malayalam
   u-hebr - Hebrew
 
 Special mappings using private use characters:
