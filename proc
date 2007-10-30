@@ -173,9 +173,11 @@ my %global_insr =
                            "FDLv1.1", "FDLv1.2",
 			   "Artistic", # Perl Artistic Licence
 			   "Copyrighted", # Copyright message must remain
+                           "Free Software", # Meets FSF Definition of Free
 			   "Open Source", # Meets OSI defination
 			   "Public Domain", # ie none
 			   "Other", "Unknown"] },
+    copyright_desc => {required=>false},
     version => {
       check => ['\d[a-z\d\.-]+', generic],
       code => sub {$version="$val"},
@@ -1168,12 +1170,19 @@ sub README() {
     $extra_info .= "This word list is considered accurate.\n";
   }
 
+  my $copyright = defined $info->{copyright_desc} ? $info->{copyright_desc} : $info->{copyright};
+  my $copyright_str = "Copyright Terms: $copyright (see the file Copyright for the exact terms)";
+  if (length($copyright_str) > 78) {
+    $copyright_str  = "Copyright Terms: $copyright\n";
+    $copyright_str .= "  (see the file Copyright for the exact terms)";
+  }
+
   my $readme = <<"---";
 GNU Aspell $aspell_version $lang_name Dictionary Package
 Version $version
 $date
 $author_info
-Copyright Terms: $info->{copyright} (see the file Copyright for the exact terms)
+$copyright_str
 $extra_info
 This is the $info->{name_english} dictionary for Aspell.  It requires Aspell 
 version $aspell_version or better.

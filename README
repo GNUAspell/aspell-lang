@@ -128,6 +128,7 @@ copyright: The copyright one of:
   VDLv1.2
   Artistic
   Copyrighted (Copyright message must remain)
+  Free Software (Meets FSF definition of free)
   Open Source (Meets OSI definition)
   Public Domain (ie none)
   Other
@@ -229,6 +230,8 @@ name_ascii: The language name in spelled in its own language in all
 ascii characters
 name_native: Like above but not limited to ASCII characters or the Latin
   script.
+copyright_desc: A BRIEF description of the copyright if the copyright line
+  doesn't adequately describe it
 notes: A BRIEF description of any major problems with this dictionary,
   other than being incomplete or inaccurate, such as being too large.
 
