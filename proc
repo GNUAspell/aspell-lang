@@ -1255,15 +1255,7 @@ be found in the doc/ directory.
     $enc = $UTF8 unless length $enc > 0;
     open RF, '<:bytes', "doc/$file";
     while (<RF>) {
-      if ($enc eq $UTF8) {
-        if (!is_utf8($_, 1)) {
-          error_message "The file $file contains an invalid UTF-8 sequence.";
-          last;
-        }
-        $readme .= $_;
-      } else {
         $readme .= decode($enc, $_);
-      }
     }
     close RF;
   }
