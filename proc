@@ -114,6 +114,7 @@ sub try_read ( $ ) {
 
 my ($key,$val,$info,$insr,@authors,%alt_encodings,%dicts,%copying,%files);
 my $lang;
+my ($lang_prefix, $lang_suffix);
 my $mode;
 my $version;
 
@@ -130,7 +131,7 @@ sub ascii()    {["[\x20-\x7E]+",
 sub any()      {[".+","ERROR"]}
 sub generic()  {"is not in the proper format"}
 
-sub dict()     {return ["$lang(_[A-Z]{2}|)(|-[a-z0-9_-]+)(-[0-9]{2}|)", 
+sub dict()     {return ["$lang_prefix(_[A-Z]{2}|)(|-[a-z0-9_-]+)(-[0-9]{2}|)$lang_suffix",
 			generic]}
 
 sub split_dict ( $ ) {my $dict = dict->[0]; 
@@ -138,10 +139,11 @@ sub split_dict ( $ ) {my $dict = dict->[0];
 		      foreach (@data) {next unless $_;
 				       $_ = substr $_, 1}
 		      return @data}
-sub form_dict ( @ )  {my $name = $lang;
+sub form_dict ( @ )  {my $name = $lang_prefix;
 		      $name .= "_$_[0]" if $_[0];
 		      $name .= "-$_[1]" if $_[1];
 		      $name .= "-$_[2]" if $_[2];
+		      $name .= $lang_suffix if $lang_suffix;
 		      return $name}
 sub README();
 
@@ -195,6 +197,8 @@ my %global_insr =
 		      "must consist of two or three lowercase ASCII characters"],
              code => sub {
                $lang = $val;
+               if ($lang =~ /^(.+)(-.+)$/) {$lang_prefix = $1; $lang_suffix = $2;}
+               else {$lang_prefix = $lang; $lang_suffix = '';}
                try_read "$lang.dat";
                push @{$files{data}}, "$lang.dat";
              },
@@ -595,7 +599,7 @@ while (my $key = shift @toproc) {
   
   next unless @d;
 
-  $d[0] = $lang . ($d[0] ? '_' : ''). $d[0];
+  $d[0] = $lang_prefix . ($d[0] ? '_' : '') . $d[0] . $lang_suffix;
 
   my $get_aliases = sub {
     my @a;
